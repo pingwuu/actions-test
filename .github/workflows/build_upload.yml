@@ -31,11 +31,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Clone source code
-      run: |
-        echo "--- cpu info ---"
-        `cat /proc/cpuinfo`
+      run: |        
         echo "--- mem info ---"
         `free -h`
+        echo "--- cpu info ---"
+        `cat /proc/cpuinfo`
         echo "--- disk info ---"
         `df -h`
         git clone ${{github.event.inputs.git-address}} /opt/buildroot
