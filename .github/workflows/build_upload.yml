@@ -29,13 +29,14 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
-    - name: Clone source code
-      run: |        
-        echo "--- target info ---\n"
+    #- uses: actions/checkout@v2
+    - name: Target Info
+      run: |
         echo "`free -h`"
         echo "`cat /proc/cpuinfo`"
         echo "`df -h`"
+    - name: Clone source code
+      run: |                
         # clone repo
         git clone ${{github.event.inputs.git-address}} /opt/buildroot
         cd /opt/buildroot
