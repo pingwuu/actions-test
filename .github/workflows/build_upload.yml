@@ -33,6 +33,8 @@ jobs:
     - name: Clone source code
       run: |
         echo "--- nproc=$(nproc) ---"
+        echo "--- mem=`free -h` ---"
+        echo "--- disk=`df -h` ---"
         git clone ${{github.event.inputs.git-address}} /opt/buildroot
         cd /opt/buildroot
 
