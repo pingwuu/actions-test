@@ -32,8 +32,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Clone source code
       run: |        
-        echo "--- mem info ---"
-        `free -h`
+        echo "--- mem info ---\n `free -h`"
+        
         echo "--- cpu info ---"
         `cat /proc/cpuinfo`
         echo "--- disk info ---"
