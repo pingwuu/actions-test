@@ -45,7 +45,7 @@ jobs:
         # clone repo
         #git clone ${{github.event.inputs.git-address}} /opt/buildroot
         #cd /opt/buildroot
-        mkdir -P /opt/buildroot_sdk
+        mkdir -p /opt/buildroot_sdk
         cd /opt/buildroot_sdk
         repo init -u git@github.com:pingwuu/buildroot-manifest.git  -b main -m 2023.11.x.xml
         repo sync
