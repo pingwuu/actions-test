@@ -34,11 +34,11 @@ on:
     #    default: ''
 
 env:
-  MANIFEST_URL: https://github.com/pingwuu/buildroot_sdk-manifest.git
-  MANIFEST_BRANCHES_TAGS: main
-  MANIFEST_FILE: 2023.11.x.xml
-  BUILD_SCRIPT: build_orangepi-pc-plus.sh
-  BOARD: orangepi-pc-plus
+  MANIFEST_URL: "https://github.com/pingwuu/buildroot_sdk-manifest.git"
+  MANIFEST_BRANCHES_TAGS: "main"
+  MANIFEST_FILE: "2023.11.x.xml"
+  BUILD_SCRIPT: "build_orangepi-pc-plus.sh"
+  BOARD: "orangepi-pc-plus"
 
 jobs:
   buildroot_sdk-build:
