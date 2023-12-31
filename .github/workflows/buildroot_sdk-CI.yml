@@ -68,7 +68,7 @@ jobs:
         echo '---start build with : ${{github.event.inputs.build-script}}---'
         bash ${{github.event.inputs.build-script}}
 
-    - name : Upload buildroot_sdk-${{github.event.inputs.board}}
+    - name : Upload buildroot_sdk-${{github.event.inputs.board}} output/images
       uses: actions/upload-artifact@master
       with:
         name: buildroot_sdk-${{github.event.inputs.board}}
