@@ -39,6 +39,11 @@ jobs:
         sudo apt-get update
         sudo apt-get upgrade
         sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
+        # Install repo tool and add to $PATH
+        mkdir ~/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+        chmod a+x ~/bin/repo
+        export PATH=${PATH}:~/bin
 
     - name: Download source code
       run: |                
