@@ -1,20 +1,23 @@
-name: buildroot-build
+name: buildroot_sdk-CI
 
 on:
+  push:
+    branches:
+      - 2023.11.x
   workflow_dispatch:
     inputs:
       manifest-url:
         description: 'manifest-url'
         required: true
-        default: 'https://github.com/pingwuu/buildroot-manifest.git'
+        default: 'https://github.com/pingwuu/buildroot_sdk-manifest.git'
+      manifest-file:
+        description: 'manifest-file'
+        required: true
+        default: '2023.11.x.xml'
       build-script:
         description: 'build-script'
         required: true
         default: 'build_orangepi-pc-plus.sh'
-      branches-tags:
-        description: 'branches-tags'
-        required: true
-        default: 'main'
       board:
         description: 'board'
         required: true
@@ -22,17 +25,20 @@ on:
       build-with:
         description: 'build-with'
         required: false
-        default: '--silent'
+        default: ''
 
 jobs:
-  build:
+  buildroot_sdk-build:
     runs-on: ubuntu-latest
     steps:
-    - name: Host Info
+    - name: Fetch Host Info
       run: |
+        echo "Host Memory Info:"
         echo "`free -h`"
-        echo "`cat /proc/cpuinfo`"
+        echo "Host Disk Info:"
         echo "`df -h`"
+        echo "Host CPU info:"
+        echo "`cat /proc/cpuinfo`"
 
     - name: Install packages
       run: |
@@ -46,37 +52,24 @@ jobs:
         echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
         echo "---GITHUB_PATH : $GITHUB_PATH"
         
-
     - name: Download source code
       run: |                
-        # clone repo
+        # Download manifest repo and sync code
         #git clone ${{github.event.inputs.git-address}} /opt/buildroot
         #cd /opt/buildroot
         mkdir -p /opt/buildroot_sdk
         cd /opt/buildroot_sdk
-        repo init -u https://github.com/pingwuu/buildroot-manifest.git -b main -m 2023.11.x.xml
+        repo init -u ${{github.event.inputs.manifest-url}} -m ${{github.event.inputs.manifest-url}}
         repo sync
       
     - name: Bulid buildroot_sdk
       run: |
-        ### mkdir /opt/firmware
         cd /opt/buildroot_sdk
-        #git checkout ${{github.event.inputs.branches-tags}}
-        #git pull origin ${{github.event.inputs.branches-tags}}
-
-        ### if [ ${{github.event.inputs.custom-config}}!='' ]; then cp -f /home/runner/work/buildroot-actions/buildroot-actions/configs/${{github.event.inputs.custom-config}} configs/; fi
-
-        echo '---start make---'
+        echo '---start build with : ${{github.event.inputs.build-script}}---'
         bash ${{github.event.inputs.build-script}}
-        ### make ${{github.event.inputs.board}}_defconfig
-        #make ${{github.event.inputs.custom-config}}
 
-        #echo '--- make ${{github.event.inputs.build-with}} -j$(nproc) 2>&1 | tee build-log.txt ---'
-        #make ${{github.event.inputs.build-with}} -j$(nproc) 2>&1 | tee build-log.txt
-        ### cp -r /opt/buildroot/output/images /opt/firmware
-
-    - name : Upload buildroot-${{github.event.inputs.branches-tags}}-${{github.event.inputs.board}}
+    - name : Upload buildroot_sdk-${{github.event.inputs.board}}
       uses: actions/upload-artifact@master
       with:
-        name: buildroot-${{github.event.inputs.branches-tags}}-${{github.event.inputs.board}}
-        path: /opt/buildroot_sdk/output_orangepi-pc-plus/images
+        name: buildroot_sdk-${{github.event.inputs.board}}
+        path: /opt/buildroot_sdk/output_${{github.event.inputs.board}}/images
