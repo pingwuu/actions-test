@@ -79,4 +79,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: buildroot-${{github.event.inputs.branches-tags}}-${{github.event.inputs.board}}
-        path: /opt/buildroot_sdk/output/images
+        path: /opt/buildroot_sdk/output_orangepi-pc-plus/images
