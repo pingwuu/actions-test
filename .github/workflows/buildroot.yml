@@ -54,7 +54,7 @@ jobs:
         #cd /opt/buildroot
         mkdir -p /opt/buildroot_sdk
         cd /opt/buildroot_sdk
-        repo init -u git@github.com:pingwuu/buildroot-manifest.git  -b main -m 2023.11.x.xml
+        repo init -u https://github.com/pingwuu/buildroot-manifest.git -b main -m 2023.11.x.xml
         repo sync
       
     - name: Bulid buildroot_sdk
