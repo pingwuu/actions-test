@@ -40,10 +40,12 @@ jobs:
         sudo apt-get upgrade
         sudo apt-get install -y make gcc g++ unzip git bc python device-tree-compiler mtd-utils curl
         # Install repo tool and add to $PATH
-        mkdir ~/bin
-        curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-        chmod a+x ~/bin/repo
-        export PATH=${PATH}:~/bin
+        mkdir $GITHUB_WORKSPACE/bin
+        curl https://storage.googleapis.com/git-repo-downloads/repo > $GITHUB_WORKSPACE/bin/repo
+        chmod a+x $GITHUB_WORKSPACE/bin/repo
+        echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
+        echo "---GITHUB_PATH : $GITHUB_PATH"
+        
 
     - name: Download source code
       run: |                
