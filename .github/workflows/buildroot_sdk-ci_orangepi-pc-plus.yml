@@ -71,6 +71,8 @@ jobs:
         mkdir -p /opt/buildroot_sdk
         cd /opt/buildroot_sdk
         #repo init -u ${{github.event.inputs.manifest-url}} -b ${{github.event.inputs.manifest-branches-tags}} -m ${{github.event.inputs.manifest-file}}
+
+        echo "--- repo init -u $MANIFEST_URL -b $MANIFEST_BRANCHES -m $MANIFEST_FILE ---"
         repo init -u $MANIFEST_URL -b $MANIFEST_BRANCHES -m $MANIFEST_FILE
         repo sync
       
