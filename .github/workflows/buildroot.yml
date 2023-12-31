@@ -60,7 +60,7 @@ jobs:
     - name: Bulid buildroot_sdk
       run: |
         ### mkdir /opt/firmware
-        cd /opt/buildroot
+        cd /opt/buildroot_sdk
         #git checkout ${{github.event.inputs.branches-tags}}
         #git pull origin ${{github.event.inputs.branches-tags}}
 
@@ -79,4 +79,4 @@ jobs:
       uses: actions/upload-artifact@master
       with:
         name: buildroot-${{github.event.inputs.branches-tags}}-${{github.event.inputs.board}}
-        path: /opt/buildroot/output/images
+        path: /opt/buildroot_sdk/output/images
